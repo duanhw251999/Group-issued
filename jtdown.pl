@@ -73,11 +73,21 @@ sub trans_file
 
 
 
+
 sub main(){
-   scan_server();
-   share_unit();
-   unzip_file();
-   trans_file();s
+   while(1==1){
+		msg("***********************************************************");
+		msg("She prompt PID==>	$$  duanhw ");
+		msg("***********************************************************");
+		scan_server();
+		sleep(600);
+		share_unit();
+		sleep(600);
+		unzip_file();
+		sleep(600);
+		trans_file();
+		sleep(600);
+   }
 }
 
 main();
