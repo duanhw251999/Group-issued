@@ -8,18 +8,7 @@ use File::Copy qw(move);
 # 段宏伟
 # 2020-04-10
 ########################
-=pod
-i_20200411_12144_00_001.dat
-LDAPD_PERSON_ACCOUNT_NO_WITHDRAW_BAL
-.20200413
-.20200412
-.00
-.000
-.000
-.862
-.CHECK
-i_20200411_30148_00.verf    	
-=cut
+
 sub trans_dat
 {
      my $path=shift;
@@ -27,13 +16,13 @@ sub trans_dat
 	opendir  TEMPDIR,$path  or die "Can not open this dir";
 	my @dat_list = grep {/\.DAT$/} readdir  TEMPDIR;
 	for(@dat_list){
-			my $new_name=$path.cover_file($_,$path);	
-			move $path.$_,$new_name;
+		     my $dat_file=$_;
+			my $new_name=cover_file($dat_file,$path);	
+		    `mv $path$dat_file  $path$new_name`;
 	 }
 	close  TEMPDIR;
 }
 
-#通过dat 和check文件名成，转换为dat和verf文件
 sub cover_file
 {
 	     my ($file_name,$path)=@_;
@@ -55,7 +44,6 @@ sub cover_file
 				$interface_file=lc($conf_arr[4])."_${datadate}_$conf_arr[3]_$datarr[3].verf";
 			}
 		}
-		#print "$file_name-->$interface_file\n";
 		return $interface_file;
 }
 
@@ -85,7 +73,6 @@ sub trans_verf
 
 sub trans_verf0
 {
-	#LDAPM_STAR_GRD_USER_INFO.20200413.20200412.00.001.002.862.VAL
 	my $path=shift;
 	opendir  TEMPDIR,$path  or die "Can not open this dir";
 	my @check_list = grep {/.CHECK$/} readdir  TEMPDIR;
@@ -156,12 +143,4 @@ sub valid_dat_val{
    }
    return $flag;
 }
-
-
-
-sub main(){
-	my $path='/pardata/EDADATA/JT_SOURCE/TEMP/DATA/trans/';
-	my $path2='/pardata/EDADATA/INTERFACE/BSS/DATA/';
-	move_bss($path,$path2);
-}
-main();
+1;

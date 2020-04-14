@@ -9,7 +9,7 @@ use helperx;
 ########################
 
 
-#将文件共享给厂家
+
 sub share_unit
 {
 	  my $path=shift;
@@ -34,11 +34,11 @@ sub share_unit
 	  }
 	   close  TEMPDIR;
 }
-#删除接口号为NULL的文件并将不为NULL的挪入zip目录
+
 sub delete_interfase_null
 {
 	  my $path=shift;
-	  my $path_zip='/pardata/EDADATA/JT_SOURCE/TEMP/DATA/zip/';
+	  my $path_zip='/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/zip/';
 	  opendir  TEMPDIR,$path  or die "Can not open this dir";
 	  my @file_list = readdir  TEMPDIR;
 	  my $size=@file_list;
@@ -62,7 +62,7 @@ sub delete_interfase_null
 	  close  TEMPDIR;
 }
 
-#剔除不在配置表中的文件
+
 sub delete_name_null
 {
 	my $path=shift;
@@ -76,8 +76,8 @@ sub delete_name_null
 	  		my $name=$namestr[0];
 	  		my $name_value= conf::find_element($name,0);
 	  		if($name_value eq ''){
-	  			print  "$full will drop ......\n"
-	  			#`rm -rf $full`;
+	  			print  "$full will drop ......\n";
+	  			`rm -rf $full`;
 	  		}
 		}
 	}
@@ -85,10 +85,4 @@ sub delete_name_null
 	close  TEMPDIR;
      	
 }
-
-sub main(){
-print "start...\n";
-delete_interfase_null("/pardata/EDADATA/JT_SOURCE/TEMP/DATA/trans/");
-print "end...\n";	
-}
-main();
+1;

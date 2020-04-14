@@ -7,10 +7,9 @@ package unzip;
 
 sub apart_gz_file
 {
-	my $path='/pardata/EDADATA/JT_SOURCE/TEMP/DATA/zip/';
-	`cd $path`;
-	`gunzip  $path*.gz`;
-	`mv  $path*.* /pardata/EDADATA/JT_SOURCE/TEMP/DATA/trans/`
+	my $path=shift;
+	`gunzip -f  $path*.gz`;
+	`mv  $path*.* /pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/trans/`
 }
 
 1;

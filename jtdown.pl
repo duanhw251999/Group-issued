@@ -22,64 +22,50 @@ my @path=(
 ,'/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/trans/'
 ,'/pardata/EDADATA/INTERFACE/BSS/DATA/');
 
-=pod
-1.下载后挪入共享目录
-2.进入共享目录
-		2.1 将所有可以共享的源文件共享给厂家
-		2.2 将所有文件备份到day目录
-		2.3 剔除所有接口为空的源文件
-		2.4 将有接口的源文件挪入zip目录
-3.zip目录
-		3.1 对所有gz文件进行解压		
-		3.2 将解压文件挪入trans目录
-4.进入trans目录
-         4.1修改为接口文件
-         4.2将所有文件挪入97	BSS/DATA/目录	
-=cut
+
 sub scan_server
 { 
-	msg('scan_server start...');
+	helperx::msg('scan_server start...');
     conftp::switch_server();
     `mv $path[0]*.* $path[1]`;
-    msg('scan_server end...');
+    helperx::msg('scan_server end...');
 }
 
 sub share_unit
 {
-   msg('share_unit start...');
+   helperx::msg('share_unit start...');
    share::share_unit($path[1]);	
    `cp $path[1]*.* $path[2]`;
    share::delete_name_null($path[1]);
    share::delete_interfase_null($path[1]);
-   msg('share_unit end...');   
+   helperx::msg('share_unit end...');   
 }
 
 sub unzip_file
 {
-	msg('Unzip start...');   
-	unzip::apart_gz_file();
-     msg('Unzip end...');   
+	helperx::msg('Unzip start...');   
+	unzip::apart_gz_file($path[3]);
+     helperx::msg('Unzip end...');   
 }
 
 sub trans_file
 {
-	msg('Trans start...');   
+	helperx::msg('Trans start...');   
 	trans::filter_check($path[4]);
 	trans::trans_dat($path[4]);
 	trans::trans_verf($path[4]);
 	trans::clear_file($path[4]);
 	trans::move_bss($path[4],$path[5]);
-	msg('Trans end...');   
+	helperx::msg('Trans end...');   
 }
 
 
 
-
 sub main(){
-   while(1==1){
-		msg("***********************************************************");
-		msg("She prompt PID==>	$$  duanhw ");
-		msg("***********************************************************");
+    while(1==1){
+		helperx::msg("***********************************************************");
+		helperx::msg("She prompt PID==>	$$  duanhw ");
+		helperx::msg("***********************************************************");
 		scan_server();
 		sleep(600);
 		share_unit();

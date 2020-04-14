@@ -12,7 +12,7 @@ use File::Basename;
 ########################
 
 ##################################################################
-sub getFtp     #::::::FTP通用方法，创建一个通用FTP对象用于远程操作
+sub getFtp    
 ##################################################################
 {
 	my ( $host,$user,$passwd,$remote_path)=@_;
@@ -23,9 +23,8 @@ sub getFtp     #::::::FTP通用方法，创建一个通用FTP对象用于远程�
 	$ftp->login($user,$passwd		) or die "Can not login"; #$ftp->message;
 	return $ftp;
 }
-###################################################################################
-# 切换服务器及目录
-###################################################################################
+
+
 sub switch_server(){
 		my %conStr=(
 	   '122gen'=>'10.254.173.122,ftp862,ftp862#$!%@,/'
@@ -43,7 +42,7 @@ sub switch_server(){
 	     my $ftp=getFtp($host,$user,$passwd,$remote_path);
 	     if ($ftp!=null){
 	     	    $ftp->binary;
-	     		$ftp->cwd($remote_path) or die ("Can not into remote dir".$!."\n");#进入远程路径
+	     		$ftp->cwd($remote_path) or die ("Can not into remote dir".$!."\n");
 	     		my @list=$ftp->ls($remote_path);
 	     		print "current_server:$host  dir:$remote_path\n";
 	     		down_server_files($ftp,$remote_path,@list);
@@ -54,10 +53,9 @@ sub switch_server(){
 
 sub down_server_files(){
 	my ($ftp,$remote_path,@list)=@_;
-	my $localdir='/pardata/EDADATA/JT_SOURCE/TEMP/DATA/';
+	my $localdir='/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/';
 	my $count=0;
 	my $current_month=strftime("%Y%m",localtime(time()));
-	#my @txt_list=grep { /.TXT|.txt$/ } @list;
 	my @cvd_list=grep { /.CHECK|.gz|.VAL$/ } @list;
     for(@cvd_list){
 		 my($file, $dir, $ext) = fileparse($_, qr/\.[^.]*/);
