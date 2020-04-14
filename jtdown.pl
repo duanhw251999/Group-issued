@@ -14,11 +14,12 @@ use share;
 use trans;
 
 
-my @path=('/pardata/EDADATA/JT_SOURCE/TEMP/DATA/'
-,'/pardata/EDADATA/JT_SOURCE/TEMP/DATA/share/'
+my @path=(
+'/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/'
+,'/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/share/'
 ,'/pardata/EDADATA/JT_SOURCE/DAY/'
-,'/pardata/EDADATA/JT_SOURCE/TEMP/DATA/zip/'
-,'/pardata/EDADATA/JT_SOURCE/TEMP/DATA/trans/'
+,'/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/zip/'
+,'/pardata/EDADATA/JT_SOURCE/TEMP/NEWDATA/trans/'
 ,'/pardata/EDADATA/INTERFACE/BSS/DATA/');
 
 =pod
